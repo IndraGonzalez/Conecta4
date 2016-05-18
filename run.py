@@ -4,9 +4,6 @@
 import games
 import heuristics
 
-game = games.ConnectFour()
-state = game.initial
-
 count = 1
 initialPlayer = raw_input("¿Quiere comenzar la partida? (pulse 'yes' / 'no') : ")
 
@@ -15,12 +12,15 @@ while (initialPlayer != 'yes') and (initialPlayer != 'no') and (count <= 3):
     count += count
 
 if(initialPlayer == 'yes'):
-    player = 'human'
+    player = 'O'
 elif(initialPlayer == 'no'):
-    player = 'machine'
+    player = 'X'
 else:
     print("Ha superado el número máximo de intentos. Empezará la máquina.")
-    player = 'machine'
+    player = 'X'
+
+game = games.ConnectFour(var=player)
+state = game.initial
 
 count = 1
 dificultad = raw_input("Elija nivel de dificultad: \n 1-Fácil\n 2-Medio \n 3-Difícil \n")
@@ -47,7 +47,7 @@ while True:
     print "Jugador a mover:", game.to_move(state)
     game.display(state)
 
-    if player == 'human':
+    if player == 'O':
         col_str = raw_input("Movimiento: ")
         coor = int(str(col_str).strip())
         x = coor
@@ -58,13 +58,13 @@ while True:
                 y = lm[1]
 
         state = game.make_move((x, y), state)
-        player = 'machine'
+        player = 'X'
     else:
         print "Thinking..."
         #move = games.alphabeta_full_search(state, game)
         move = games.alphabeta_search(state, game,d, eval_fn=heuristica)
         state = game.make_move(move, state)
-        player = 'human'
+        player = 'O'
     print "-------------------"
     if game.terminal_test(state):
         game.display(state)
