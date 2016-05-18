@@ -26,20 +26,22 @@ count = 1
 dificultad = raw_input("Elija nivel de dificultad: \n 1-Fácil\n 2-Medio \n 3-Difícil \n")
 dificultad = int(dificultad)
 
+
 while (dificultad < 1) and (dificultad > 3) and (count <= 3) :
     dificultad = raw_input("Opción incorrecta. Vuelva a introducir el nivel : ")
     dificultad = int(dificultad)
     count += count
 
+heuristica = heuristics.h
 if(dificultad == 1):
-    heuristica = heuristics.h0
+    d = 1
 elif(dificultad == 2):
-    heuristica = heuristics.h1
+    d = 2
 elif(dificultad == 3):
-    heuristica = heuristics.h2
+    d = 4
 else:
     print("Ha superado el número máximo de intentos. Su nivel de dificultad será medio.")
-    heuristica = heuristics.h1
+    d = 2
 
 while True:
     print "Jugador a mover:", game.to_move(state)
@@ -59,9 +61,8 @@ while True:
         player = 'machine'
     else:
         print "Thinking..."
-        #move = games.minimax_decision(state, game)
         #move = games.alphabeta_full_search(state, game)
-        move = games.alphabeta_search(state, game, eval_fn=heuristica)
+        move = games.alphabeta_search(state, game,d, eval_fn=heuristica)
         state = game.make_move(move, state)
         player = 'human'
     print "-------------------"
