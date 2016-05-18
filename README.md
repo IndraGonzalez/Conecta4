@@ -13,7 +13,7 @@ Primer trabajo de curso: Búsqueda con oponente - Juego de Conecta 4
 
 	En el fichero heuristics.py hemos implementado la heurística:
 
-			En primer lugar, hemos usado el memoize() con la finalidad de que el juego vaya con mayor rapidez, para implementar el memoize, hemos definido una funcion, a la que le pasamos un argumento. Además hemos usado un dictionario memo, para guardar los resultados de la función, guardamos los estados del tablero que no se encuentran en el diccionario y lo devolvemos.
+		En primer lugar, hemos usado el memoize() con la finalidad de que el juego vaya con mayor rapidez, para implementar el memoize, hemos definido una funcion, a la que le pasamos un argumento. Además hemos usado un dictionario memo, para guardar los resultados de la función, guardamos los estados del tablero que no se encuentran en el diccionario y lo devolvemos.
 
-			Posteriormente, recorremos el tablero para en horizontal, hacia arriba , hacia abajo y en diagonal. Para ello llamamos al método find_connect, que nos devuelve una heuristica para dichos recorridos según si encontramos un espacio, al que le subamos 1, o si encontramos una ficha de nuestro jugador, al que le sumamos 5 a la heuristica. Recorremos el tablero hacia la izquierda restándole y hacia la derecha sumándole a nuestra variable encargada del movimiento en horizontal (i). Finalmente devolvemos la heurística.
+		Posteriormente, recorremos el tablero para en horizontal, hacia arriba , hacia abajo y en diagonal. Para ello llamamos al método find_connect, que nos devuelve una heuristica para dichos recorridos según si encontramos un espacio, al que le subamos 1, o si encontramos una ficha de nuestro jugador, al que le sumamos 5 a la heuristica. Recorremos el tablero hacia la izquierda restándole y hacia la derecha sumándole a nuestra variable encargada del movimiento en horizontal (i). Finalmente devolvemos la heurística.
 
