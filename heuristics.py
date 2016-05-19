@@ -14,7 +14,7 @@ def memoize(f):
 def h(state):
 
     board = state.board
-    player = state.to_move
+    player = 'X'
     adversary = 'O'
     heuristic = 0
 
@@ -35,21 +35,29 @@ def h(state):
 
     return heuristic
 
+
+def getAdversary(player):
+    if player == 'X':
+        return 'O'
+    else:
+        return 'X'
+
+
 def find_connect(board, move, player, (delta_x, delta_y)):
     # h -> heuristica parcial que se sumara o restara a la total
     h = 0
     # i -> numero de posiciones recorridas
     i = 0
-    adversary = 'O'
+    adversary = getAdversary(player)
     x,y = move
 
     while board.get((x, y)) != adversary:
         if x > 7 or x < 0 or y > 6 or y < 0:
              break
         if(board.get((x, y)) == player):
-            h += 5
+            h += 6
         else:
-            h += 1
+            h += 2
         i += 1
         x, y = x + delta_x, y + delta_y
 
@@ -58,9 +66,9 @@ def find_connect(board, move, player, (delta_x, delta_y)):
         if x > 7 or x < 0 or y > 6 or y < 0:
              break
         if(board.get((x, y)) == player):
-            h += 5
+            h += 6
         else:
-            h += 1
+            h += 2
         i += 1
         x, y = x - delta_x, y - delta_y
 
@@ -68,8 +76,7 @@ def find_connect(board, move, player, (delta_x, delta_y)):
 
     if i >= 4:
         return h
-    else:
-        return 0
+    return 0
 
 
 def legal_moves(state):
