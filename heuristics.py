@@ -55,7 +55,7 @@ def find_connect(board, move, player, (delta_x, delta_y)):
     x,y = move
 
     while board.get((x, y)) != adversary:
-        if x > 7 or x < 0 or y > 6 or y < 0:
+        if x > 7 or x <= 0 or y > 6 or y <= 0:
              break
         if(board.get((x, y)) == player):
             h += 6
@@ -66,7 +66,7 @@ def find_connect(board, move, player, (delta_x, delta_y)):
 
     x, y = move
     while board.get((x, y)) != adversary:
-        if x > 7 or x < 0 or y > 6 or y < 0:
+        if x > 7 or x <= 0 or y > 6 or y <= 0:
              break
         if(board.get((x, y)) == player):
             h += 6
