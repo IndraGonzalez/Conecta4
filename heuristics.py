@@ -2,24 +2,33 @@ import utils
 
 def memoize(f):
     memo = {}
-    def dictionary(state):
+    def dictionary(state,player):
         key = tuple(state.board.items())
         if key not in memo:
-            memo[key] = f(state)
+            memo[key] = f(state,player)
         return memo[key]
     return dictionary
 
-@memoize
 
-def h(state):
+def getAdversary(player):
+    if player == 'X':
+        return 'O'
+    else:
+        return 'X'
+
+
+@memoize
+def h(state,player):
 
     board = state.board
-    player = 'X'
-    adversary = 'O'
+    adversary = getAdversary(player)
     heuristic = 0
 
     if(state.utility != 0):
-        return state.utility*utils.infinity
+        if(player == 'X'):
+            return state.utility*utils.infinity
+        else:
+            return -1 * state.utility*utils.infinity
 
 
     for move in legal_moves(state):
@@ -36,19 +45,13 @@ def h(state):
     return heuristic
 
 
-def getAdversary(player):
-    if player == 'X':
-        return 'O'
-    else:
-        return 'X'
-
-
 def find_connect(board, move, player, (delta_x, delta_y)):
     # h -> heuristica parcial que se sumara o restara a la total
     h = 0
     # i -> numero de posiciones recorridas
     i = 0
     adversary = getAdversary(player)
+
     x,y = move
 
     while board.get((x, y)) != adversary:
@@ -73,6 +76,8 @@ def find_connect(board, move, player, (delta_x, delta_y)):
         x, y = x - delta_x, y - delta_y
 
     i -= 1
+    #h -= 12
+    h -= 4
 
     if i >= 4:
         return h
